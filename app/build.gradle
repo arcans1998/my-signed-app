@@ -1,0 +1,59 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdk
+    buildToolsVersion rootProject.ext.buildTools
+
+    defaultConfig {
+        applicationId rootProject.ext.appId
+        minSdkVersion rootProject.ext.minSdk
+        targetSdkVersion rootProject.ext.targetSdk
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName 
+    }
+
+    
+    signingConfigs {
+        create("release") {
+            // You need to specify either an absolute path or include the
+            // keystore file in the same directory as the build.gradle file.
+            
+            storeFile = file("/storage/emulated/0/AndroidIDEProjects/MySignedApp/stt.keystore")
+            storePassword = "sttSUBSCRIBE143"
+            keyAlias = "subscribe_stt"
+            keyPassword = "sttSUBSCRIBE143"
+            v1SigningEnabled = true
+            v2SigningEnabled = true
+            
+        
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+    
+    compileOptions {
+		sourceCompatibility JavaVersion.VERSION_17
+		targetCompatibility JavaVersion.VERSION_17
+	}
+	
+	lintOptions {
+	    abortOnError false
+	}
+    
+    aaptOptions {
+    	cruncherEnabled = false
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
+}

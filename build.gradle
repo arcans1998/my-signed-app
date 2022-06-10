@@ -1,0 +1,36 @@
+buildscript {
+    ext {
+    	build_gradle_version = '7.2.0-rc02'
+    }
+    
+    project.ext {
+    	compileSdk = 31
+        buildTools = "31.0.0"
+        appId = "com.sketchwaretagalog.sign"
+        minSdk = 25
+        targetSdk = 31
+        versionCode = 100
+		versionName = "1.0.0"
+    }
+    
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        google()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$build_gradle_version"
+    }
+    
+}
+allprojects {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        google()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
